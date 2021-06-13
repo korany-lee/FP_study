@@ -56,5 +56,62 @@ function _filter(items, predi) {
   return result;
 }
 
-console.log('30세 이상', _filter(users, 31));
-console.log('30세 미만', _filter(users, 30));
+var over30 = _filter(users, function (user) {
+  return user.age >= 30;
+});
+console.log('30세 이상', over30);
+var under30 = _filter(users, function (user) {
+  return user.age < 30;
+});
+console.log('30세 미만', under30);
+//정리 -> _filter 함수처럼 매개변수로 함수를 받는 것을 고차함수라고 함.
+// _filter함수는 단순히 users에 국한된 것이 아니라, 안에 매개변수로 넣는 배열과 조건 함수에 따라 다양한 일들을 할 수 있다.
+
+//다시 돌아가서 2번과 4번도 같은 역할을 하고 있다.
+//때문에 _map이라는 함수로 하나의 함수이지만 age와 name을 수집하는 또 다른 고차함수를 만들어보자
+function _map(item, mapper) {
+  let result = [];
+  for (let i = 0; i < item.length; i++) {
+    result.push(mapper(item[i]));
+  }
+  return result;
+}
+//_filter로 한번 걸러준 후에 _map으로 반환해주어야 함!
+console.log(
+  '30세 이상의 name',
+  _map(over30, function (user) {
+    return user.name;
+  })
+);
+//여기서 over30에 대한 값에 pop메소드를 실행하거나 slice라는 메소드를 실행해서 값을 변형시킬 우려가 있기 때문에? -> 이걸 대인문 설명하면서..?
+
+console.log(
+  '30세 미만의 age',
+  _map(under30, function (user) {
+    return user.age;
+  })
+);
+
+//대인문?이 없으면 보다 간결한 코드를 만들어 줄 수 있다.
+console.log(
+  _map(
+    _filter(users, function (user) {
+      return user.age >= 30;
+    }),
+    function (user) {
+      return user.name;
+    }
+  )
+);
+console.log(
+  _map(
+    _filter(users, function (user) {
+      return user.age < 30;
+    }),
+    function (user) {
+      return user.age;
+    }
+  )
+);
+
+//3.
