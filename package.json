@@ -1,0 +1,19 @@
+{
+  "name": "fp_study",
+  "version": "1.0.0",
+  "description": "Functional Programming with 개발팀 ☺︎",
+  "main": "section2.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/korany-lee/FP_study.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/korany-lee/FP_study/issues"
+  },
+  "homepage": "https://github.com/korany-lee/FP_study#readme"
+}
