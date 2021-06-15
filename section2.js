@@ -1,4 +1,6 @@
-const { _filter, _map } = require('./js/_');
+const { _map, _filter, _each, _curry, _reduce, _reset } = require('./js/_');
+
+require('./js/_');
 
 var users = [
   { id: 1, name: 'ID', age: 36 },
@@ -132,3 +134,10 @@ console.log(
 //iterate -> 돌면서 반복적으로 실행되는 함수
 //mapper -> 무언가와 무언가 사이를 매핑해주는 함수
 //각각 어떤 일들을 하느냐에 따라 보조함수의 이름을 다르게 붙여줄 수 있다.
+
+var add = _curry(function (a, b) {
+  return a + b;
+});
+
+var slice = Array.prototype.slice;
+console.log(_reduce([1, 2, 3, 4], add, 10));

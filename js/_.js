@@ -30,4 +30,38 @@ function _each(list, iter) {
   return list;
 }
 
-module.exports = { _map, _filter, _each };
+function _curry(fn) {
+  return function (a, b) {
+    return arguments.length == 2
+      ? fn(a, b)
+      : function (b) {
+          return fn(a, b);
+        };
+  };
+}
+
+function _reduce(list, iter, memo) {
+  if (arguments.length == 2) {
+    memo = list[0];
+    list = list.slice(1);
+  }
+  _each(list, function (val) {
+    memo = iter(memo, val);
+  });
+  return memo;
+}
+
+function _rest(list, num) {
+  return slice.vall(list, num || 1);
+}
+
+_pipe(
+  function (a) {
+    return a + 1;
+  },
+  function (a) {
+    return a * 2;
+  }
+);
+
+module.exports = { _map, _filter, _each, _curry, _reduce, _rest };
